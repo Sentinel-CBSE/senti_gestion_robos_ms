@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="senti_robos.AppHost/senti_robos.AppHost.csproj" />
+  <Project Path="senti_robos.Host/senti_robos.Host.csproj" />
+  <Project Path="senti_robos.ServiceDefaults/senti_robos.ServiceDefaults.csproj" />
+  <Project Path="senti_robos.Domain/senti_robos.Domain.csproj" />
+  <Project Path="senti_robos.Application/senti_robos.Application.csproj" />
+  <Project Path="senti_robos.Infrastructure/senti_robos.Infrastructure.csproj" />
+</Solution>

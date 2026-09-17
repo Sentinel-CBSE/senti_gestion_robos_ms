@@ -1,0 +1,6 @@
+@senti_robos.Host_HostAddress = http://localhost:5210
+
+GET {{senti_robos.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
