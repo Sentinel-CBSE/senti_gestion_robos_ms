@@ -51,11 +51,8 @@ await app.MigrateDatabaseAsync();
 app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.MapScalarApiReference(); // UI at /scalar/v1
-}
+app.MapOpenApi("/openapi.json");
+app.MapScalarApiReference(); // UI at /scalar/v1
 
 // Skip HTTPS redirection in Development: ngrok (and Event Grid, Postman, etc.
 // hitting it) already talk HTTPS at the edge and forward to this app over

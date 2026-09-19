@@ -13,6 +13,10 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["senti_robos.Host/senti_robos.Host.csproj", "senti_robos.Host/"]
+COPY ["senti_robos.ServiceDefaults/senti_robos.ServiceDefaults.csproj", "senti_robos.ServiceDefaults/"]
+COPY ["senti_robos.Application/senti_robos.Application.csproj", "senti_robos.Application/"]
+COPY ["senti_robos.Domain/senti_robos.Domain.csproj", "senti_robos.Domain/"]
+COPY ["senti_robos.Infrastructure/senti_robos.Infrastructure.csproj", "senti_robos.Infrastructure/"]
 RUN dotnet restore "./senti_robos.Host/senti_robos.Host.csproj"
 COPY . .
 WORKDIR "/src/senti_robos.Host"
