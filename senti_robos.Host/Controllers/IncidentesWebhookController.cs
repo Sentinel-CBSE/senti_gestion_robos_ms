@@ -25,11 +25,28 @@ public class IncidentesWebhookController(IMediator mediator, ILogger<IncidentesW
 
     // Event Grid's webhook handler always uses HTTP POST — both for the
     // subscription validation handshake and for real event delivery.
-    [HttpPost]
+    [HttpPost("/create")]
     public async Task<IActionResult> Receive(CancellationToken cancellationToken)
     {
         var body = await BinaryData.FromStreamAsync(Request.Body, cancellationToken);
-        var events = EventGridEvent.ParseMany(body);
+
+        logger.LogInformation(
+            "Webhook hit. aeg-event-type={AegType} aeg-subscription={Sub} aeg-delivery-count={Count} body={Body}",
+            Request.Headers["aeg-event-type"].ToString(),       // "Notification" or "SubscriptionValidation"
+            Request.Headers["aeg-subscription-name"].ToString(),
+            Request.Headers["aeg-delivery-count"].ToString(),
+            body.ToString());
+
+        EventGridEvent[] events;
+        try
+        {
+            events = EventGridEvent.ParseMany(body);
+        }
+        catch (JsonException ex)
+        {
+            logger.LogWarning(ex, "Invalid webhook body; expected an Event Grid schema JSON array.");
+            return BadRequest("Body must be an Event Grid schema JSON array.");
+        }
 
         foreach (var evt in events)
         {

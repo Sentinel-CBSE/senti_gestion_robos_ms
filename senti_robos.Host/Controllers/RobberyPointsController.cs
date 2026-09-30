@@ -14,7 +14,7 @@ namespace senti_robos.Host.Controllers;
 [ApiController]
 public class RobberyPointsController(IMediator mediator) : ControllerBase
 {
-    [HttpGet("api/robbery_points")]
+    [HttpGet("/list")]
     public async Task<ActionResult<List<RobberyPointDto>>> GetRobberyPoints(
         [FromQuery] double northLat,
         [FromQuery] double southLat,
